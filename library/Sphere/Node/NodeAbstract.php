@@ -69,9 +69,9 @@ implements Sphere_Node_NodeInterface
 		return strval($this->getPath());
 	}
 	
-	public function __isset($v)
+	public function __isset($child)
 	{
-	    
+	    return $this->hasChild($child);
 	}
 	
 	
@@ -114,6 +114,19 @@ implements Sphere_Node_NodeInterface
         return false;
 	}
 	
+	/**
+	 * Check to see if this is an imported node
+	 * @return boolean
+	 */
+	public function isImported()
+	{
+		if ($trueMatrix = $this->getTrueMatrix()) {
+			if ($trueMatrix->calculate() !== $this->getMatrix()->calculate()) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	/**
 	 * Return the specified nth child of this node
@@ -123,6 +136,19 @@ implements Sphere_Node_NodeInterface
 	public function getChild($childPosition)
 	{
         return $this->getInnerIterator()->offsetGet($childPosition - 1);
+	}
+	
+	
+	
+	/**
+	 * 
+	 * Check whether or not the child exists.
+	 * @param integer $childPosition
+	 * @return boolean
+	 */
+	public function hasChild($childPosition)
+	{
+		return $this->getInnerIterator()->offsetExists($childPosition -1);
 	}
 	
 	/**

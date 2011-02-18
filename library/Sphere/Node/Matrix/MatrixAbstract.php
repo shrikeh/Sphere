@@ -75,6 +75,13 @@ abstract class Sphere_Node_Matrix_MatrixAbstract implements Sphere_Node_Matrix_M
 		}
 	}
 	
+	/**
+	 * Calculate the value of the left Rational.
+	 */
+	public function calculate()
+	{
+		return (double) $this->getLftRational()->toValue();
+	}
 	
 	/**
 	 * Return the materialized path.

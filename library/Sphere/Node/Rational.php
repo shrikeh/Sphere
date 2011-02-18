@@ -28,6 +28,13 @@ class Sphere_Node_Rational implements Sphere_Node_Rational_RationalInterface
 	protected $_numer;
 	protected $_denom;
 	
+	
+	/**
+	 * Factory pattern
+	 * 
+	 * @param integer $numer
+	 * @param integer $denom
+	 */
 	public static function factory($numer, $denom)
 	{
 		return new self($numer, $denom);
@@ -66,7 +73,13 @@ class Sphere_Node_Rational implements Sphere_Node_Rational_RationalInterface
 	}
 	
 	
-
+	/**
+	 * 
+	 * Takes
+	 * @param integer $numer
+	 * @param integer $denom
+	 * @param string $separator
+	 */
 	
 	protected static function _toPath($numer, $denom, $separator = '.')
 	{
@@ -101,12 +114,25 @@ class Sphere_Node_Rational implements Sphere_Node_Rational_RationalInterface
         return $path;	    
 	}
 	
+	
+	/**
+	 * 
+	 * Constructor.
+	 * @param integer $numer The numerator
+	 * @param integer $denom The denominator
+	 */
 	public function __construct($numer, $denom)
 	{
 		$this->setNumer($numer);
 		$this->setDenom($denom);
 	}
 	
+	/**
+	 * 
+	 * Get the path of the rational
+	 * @param string $separator
+	 * @return string
+	 */
 	public function getPath($separator = '.')
 	{
 		return strval(self::toPath($this, $separator));
@@ -118,17 +144,25 @@ class Sphere_Node_Rational implements Sphere_Node_Rational_RationalInterface
 		return floor($this->getNumer() / $this->getDenom());
 	}
 	
-	
-     public function toValue()
+	/**
+	 * 
+	 * Return the value of numerator / denominator
+	 * @return double
+	 */
+    public function toValue()
     {
-        return $this->_numer / $this->_denom;
+        return (double) $this->_numer / $this->_denom;
     }
     
-	
+	/**
+	 * 
+	 * To string method to render the path.
+	 */
 	public function __toString()
 	{
-		return $this->getNumer() . '/' . $this->getDenom();
+		return (string) $this->getNumer() . '/' . (string) $this->getDenom();
 	}
+	
 	
 	/**
 	 * Return the numerator
@@ -178,7 +212,3 @@ class Sphere_Node_Rational implements Sphere_Node_Rational_RationalInterface
 	
 
 }
-
-//$rational = Sphere_Node_Rational::factory(48, 17);
-
-//echo Sphere_Node_Rational::path($rational);
