@@ -8,7 +8,7 @@
  * @version       	Revision $LastChangedRevision$ by $LastChangedBy$ on $LastChangedDate$  
  * @access        	public
  */
-
+namespace Sphere\Node;
 /**
  * Class for representing hierarchical IDs as continued fractions
  * @category		Sphere
@@ -18,7 +18,7 @@
  * @version       	Revision $LastChangedRevision$ by $LastChangedBy$ on $LastChangedDate$  
  * @access        	public
  */
-interface Sphere_Node_NodeInterface extends SeekableIterator
+interface NodeInterface extends \SeekableIterator
 {
     
     /**
@@ -52,7 +52,7 @@ interface Sphere_Node_NodeInterface extends SeekableIterator
      * @param Sphere_Node_Interface $node
      * @return boolean true if the child is valid
      */
-    public function addChild(Sphere_Node_NodeInterface $node);
+    public function addChild(NodeInterface $node);
     
     /**
      * Return the internal content for this Node (if any)

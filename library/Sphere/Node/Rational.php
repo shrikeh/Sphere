@@ -10,8 +10,8 @@
  * @access        	public
  */
 
-/** Sphere_Node_Rational_RationalInterface **/
-//require_once('Sphere/Node/Rational/RationalInterface.php');
+namespace Sphere\Node;
+use Sphere\Node\Rational\RationalInterface as RationalInterface;
 /**
  * Class for creating rationals
  * @category        Sphere
@@ -23,7 +23,7 @@
  * @access          public
  */
 
-class Sphere_Node_Rational implements Sphere_Node_Rational_RationalInterface
+class Rational implements RationalInterface
 {
 	protected $_numer;
 	protected $_denom;
@@ -62,7 +62,7 @@ class Sphere_Node_Rational implements Sphere_Node_Rational_RationalInterface
  
 	}
 	
-	public static function toPath(Sphere_Node_Rational $rational, $separator = '.')
+	public static function toPath(Rational $rational, $separator = '.')
 	{
 		$numer = $rational->getNumer();
 		$denom = $rational->getDenom();
@@ -205,7 +205,7 @@ class Sphere_Node_Rational implements Sphere_Node_Rational_RationalInterface
 	 * @param Sphere_Node_Rational_RationalInterface $rational
 	 * @return boolean
 	 */
-	public function match(Sphere_Node_Rational_RationalInterface $rational)
+	public function match(RationalInterface $rational)
 	{
 		return ( ($this->getNumer() * $rational->getDenom()) - ($this->getDenom * $rational->getNumer()) );
 	}

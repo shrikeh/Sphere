@@ -9,7 +9,7 @@
  * @version         Revision $LastChangedRevision$ by $LastChangedBy$ on $LastChangedDate$  
  * @access          public
  */
-
+namespace Sphere\Node;
 /**
  * Class for representing hierarchical IDs as continued fractions
  * @category        Sphere
@@ -20,7 +20,7 @@
  * @version         Revision $LastChangedRevision$ by $LastChangedBy$ on $LastChangedDate$  
  * @access          public
  */
-class Sphere_Node_NodeIterator extends RecursiveArrayIterator
+class NodeIterator extends \RecursiveArrayIterator
 {
     /**
      * Add the Node at the designated offset
@@ -28,7 +28,7 @@ class Sphere_Node_NodeIterator extends RecursiveArrayIterator
      */
     public function offsetSet($offset, $node)
     {
-        if (!$node instanceof Sphere_Node_NodeInterface) {
+        if (!$node instanceof NodeInterface) {
             throw new Sphere_Node_NodeException('Cannot set child as it is not a node');
         }
         return parent::offsetSet($offset, $node);

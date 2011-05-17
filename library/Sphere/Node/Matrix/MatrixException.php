@@ -1,7 +1,7 @@
 <?php
-require_once 'Sphere/Node/NodeException.php';
+namespace Sphere\Node\Matrix;
 
-class Sphere_Node_Matrix_MatrixException extends Sphere_Node_NodeException
+class MatrixException extends Sphere\Exception
 {
 	const NOT_DESCENDENT 	= 300;
 	const NOT_ANCESTOR		= 200;

@@ -9,10 +9,9 @@
  * @version       	Revision $LastChangedRevision$ by $LastChangedBy$ on $LastChangedDate$  
  * @access        	public
  */
-/** Sphere_Node_Matrix_MatrixAbstract **/
-require_once('Sphere/Node/Matrix/MatrixAbstract.php');
-/** Sphere_Node_Rational **/
-require_once('Sphere/Node/Rational.php');
+namespace Sphere\Node;
+use Sphere\Node\Matrix\MatrixInterface as Matrixinterface;
+use Sphere\Node\Matrix\MatrixAbstract as MatrixAbstract;
 /**
  * Class for representing hierarchical IDs as continued fractions
  * @category		Sphere
@@ -23,7 +22,7 @@ require_once('Sphere/Node/Rational.php');
  * @version       	Revision $LastChangedRevision$ by $LastChangedBy$ on $LastChangedDate$  
  * @access        	public
  */
-class Sphere_Node_Matrix extends Sphere_Node_Matrix_MatrixAbstract
+class Matrix extends MatrixAbstract
 {
 
 	/**
@@ -39,8 +38,8 @@ class Sphere_Node_Matrix extends Sphere_Node_Matrix_MatrixAbstract
 	 * @return integer
 	 */
 	public static function getChildPosition(
-	   Sphere_Node_Matrix_MatrixInterface $parent, 
-	   Sphere_Node_Matrix_MatrixInterface $child
+	   MatrixInterface $parent, 
+	   MatrixInterface $child
 	   )
 	{
 		$childNumer 	= $child->getLftRational()->getNumer();
@@ -56,9 +55,9 @@ class Sphere_Node_Matrix extends Sphere_Node_Matrix_MatrixAbstract
 		if (is_int($childPosition)) {
 			return $childPosition;
 		}
-		throw new Sphere_Node_Matrix_Exception(
+		throw new MatrixException(
 			'Matrix ' . $child->getPath() . ' is not a child of Matrix ' . $parent->getPath(),
-			Sphere_Node_Matrix_MatrixException::NOT_DESCENDENT
+			MatrixException::NOT_DESCENDENT
 		);
 	}
 	
@@ -68,7 +67,7 @@ class Sphere_Node_Matrix extends Sphere_Node_Matrix_MatrixAbstract
 	 * @param integer $childPosition
 	 * @return Sphere_Node_Matrix
 	 */
-	public static function createChildMatrix(Sphere_Node_Matrix_MatrixInterface $parent, $childPosition)
+	public static function createChildMatrix(MatrixInterface $parent, $childPosition)
 	{
 	    $childLftRational  = self::_lftRational($parent, $childPosition);
 	    $childRgtRational  = self::_rgtRational($parent, $childPosition);
@@ -91,7 +90,7 @@ class Sphere_Node_Matrix extends Sphere_Node_Matrix_MatrixAbstract
 		$childNumer = $lftRational->getNumer() + ($childPosition * $rgtRational->getNumer());
 		$childDenom = $lftRational->getDenom() + ($childPosition * $rgtRational->getDenom());
 		
-		return Sphere_Node_Rational::factory($childNumer, $childDenom);		
+		return Rational::factory($childNumer, $childDenom);		
 	}
 	
 	/**

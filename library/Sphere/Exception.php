@@ -1,5 +1,6 @@
 <?php
-class Sphere_Exception extends Exception
+namespace Sphere;
+class Exception extends \Exception
 {
     
 }

@@ -9,7 +9,7 @@
  * @access        	public
  */
 /** Sphere_Node_NodeInterface **/
-//require_once('Sphere/Node/NodeInterface.php');
+namespace Sphere\Node;
 /**
  * Class for representing hierarchical IDs as continued fractions
  * @category		Sphere
@@ -20,8 +20,8 @@
  * @access        	public
  */
 
-abstract class Sphere_Node_NodeAbstract extends FilterIterator 
-implements Sphere_Node_NodeInterface
+abstract class NodeAbstract extends \FilterIterator 
+implements NodeInterface
 {
 	/**
 	 * The ID of the Node in the persistency
@@ -53,8 +53,8 @@ implements Sphere_Node_NodeInterface
 	
 	public function __construct(array $children = array())
 	{
-	    $childIterator     = new RecursiveArrayIterator(new ArrayObject($children));
-	    $innerIterator     = new Sphere_Node_NodeIterator($childIterator);
+	    $childIterator     = new \RecursiveArrayIterator(new ArrayObject($children));
+	    $innerIterator     = new NodeIterator($childIterator);
 	    
 	    parent::__construct($innerIterator);
 	}
@@ -101,7 +101,7 @@ implements Sphere_Node_NodeInterface
 	public function createChild($position, $doNotReplace = true)
 	{
 	    if ( ($this->getChild($position)) && ($doNotReplace) ) {
-	        throw new Sphere_Node_NodeException('Node already exists and you have not explicitly chosen to delete the existing one');
+	        throw new NodeException('Node already exists and you have not explicitly chosen to delete the existing one');
 	    }
         if ( ($matrix = $this->getMatrix()) && ($childMatrix = $matrix->createChild($position)) ) {
             if ($childNode = Sphere_Node::factory($childMatrix)) {
@@ -163,7 +163,7 @@ implements Sphere_Node_NodeInterface
 	/**
 	 * Moves a child into its parent's nodal branch
 	 */
-    public function setParent(Sphere_Node_NodeInterface $parent, $position)
+    public function setParent(NodeInterface $parent, $position)
     {
         $this->_setParent($parent);
         
@@ -180,7 +180,7 @@ implements Sphere_Node_NodeInterface
 	 * @param Sphere_Node_Interface $node
 	 * @return boolean True if it was able to add the Node.
 	 */
-	public function addChild(Sphere_Node_NodeInterface $node, $position = null)
+	public function addChild(NodeInterface $node, $position = null)
 	{
 	    if (is_null($position)) {
 	       $position = $this->getChildPosition($node);
@@ -200,7 +200,7 @@ implements Sphere_Node_NodeInterface
 	 * @param boolean $useTrueMatrix
 	 * @return integer
 	 */
-	public function getChildPosition(Sphere_Node_NodeInterface $child, $useTrueMatrix = false)
+	public function getChildPosition(NodeInterface $child, $useTrueMatrix = false)
 	{
 	    $parentMatrix = ($useTrueMatrix) ? $this->getTrueMatrix() : $this->getMatrix();
 	    $childMatrix  = ($useTrueMatrix) ? $child->getTrueMatrix() : $child->getMatrix();
@@ -243,7 +243,7 @@ implements Sphere_Node_NodeInterface
 	 * Also then sets it for all of the children based on this
 	 * @param Sphere_Node_Matrix $matrix
 	 */
-	public function setMatrix(Sphere_Node_Matrix $matrix)
+	public function setMatrix(Matrix $matrix)
 	{
 		$this->_matrix = $matrix;
 		if ($this->hasChildren()) {

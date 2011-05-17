@@ -1,5 +1,6 @@
 <?php
-class Sphere_Node_NodeException extends Sphere_Exception
+namespace Sphere\Node;
+class NodeException extends Sphere\Exception
 {
 	
 }

@@ -9,8 +9,8 @@
  * @version       	Revision $LastChangedRevision$ by $LastChangedBy$ on $LastChangedDate$  
  * @access        	public
  */
-/** Sphere_Node_Matrix_MatrixInterface **/
-require_once('Sphere/Node/Matrix/MatrixInterface.php');
+
+namespace Sphere\Node\Matrix;
 /**
  * Class for representing hierarchical IDs as continued fractions
  * @category		Sphere
@@ -22,7 +22,7 @@ require_once('Sphere/Node/Matrix/MatrixInterface.php');
  * @access        	public
  */
 
-abstract class Sphere_Node_Matrix_MatrixAbstract implements Sphere_Node_Matrix_MatrixInterface
+abstract class MatrixAbstract implements MatrixInterface
 {
 	/**
 	 * A Sphere_Node_Rational representing the left side of the Matrix

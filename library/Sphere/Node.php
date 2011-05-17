@@ -1,23 +1,22 @@
 <?php
+namespace Sphere;
+use Sphere\Node\NodeInterface as NodeInterface;
+use Sphere\Node\NodeAbstract as NodeAbstract;
+use Sphere\Node\Matrix as Matrix;
+use Sphere\Node\Matrix\MatrixInterface as MatrixInterface;
 /**
  * Class for representing hierarchical IDs as continued fractions
  * @category		Sphere
- * @package       	Sphere_Node
+ * @package       	Node
  * @copyright     	Copyright (c) 2009 Barney Hanlon (http://www.shrikeh.net)
  * @author        	B Hanlon <Barney_Hanlon@shrikeh.net>
  * @version       	Revision $LastChangedRevision$ by $LastChangedBy$ on $LastChangedDate$  
  * @access        	public
  */
-/** Sphere_Node_NodeAbstract **/
-//require_once 'Sphere/Node/NodeAbstract.php';
-/** Sphere_Node_Matrix **/
-//require_once 'Sphere/Node/Matrix.php';
-/** Sphere_Node_NodeIterator **/
-//require_once 'Sphere/Node/NodeIterator.php';
 /**
  * Class for representing hierarchical IDs as continued fractions
  * @category		Sphere
- * @package       	Sphere_Node
+ * @package       	Node
  * @copyright     	Copyright (c) 2009 Barney Hanlon (http://www.shrikeh.net)
  * @author        	B Hanlon <Barney_Hanlon@shrikeh.net>
  * @version       	Revision $LastChangedRevision$ by $LastChangedBy$ on $LastChangedDate$  
@@ -31,7 +30,7 @@
  * .2.1.1.2 /page/2
  * route = news/business/some-seo-link/page/2 = get node .2.1.1.2 (and activate as live all above)
  */
-class Sphere_Node extends Sphere_Node_NodeAbstract
+class Node extends NodeAbstract
 {
 	/**
 	 * An array of loaded Sphere_Node_Interface objects 
@@ -42,12 +41,12 @@ class Sphere_Node extends Sphere_Node_NodeAbstract
 	protected static $_separator = '.';
 	
 	public static function factory(
-	   Sphere_Node_Matrix $matrix, 
-	   Sphere_Node_Matrix $trueMatrix = null, 
+	   MatrixInterface $matrix, 
+	   MatrixInterface $trueMatrix = null, 
 	   array $children = array())
 	{
 
-		$sphere = new Sphere_Node($children);	
+		$sphere = new Node($children);	
 		$sphere->setMatrix($matrix);
 		$sphere->setTrueMatrix($trueMatrix);
 		return $sphere;
@@ -65,7 +64,7 @@ class Sphere_Node extends Sphere_Node_NodeAbstract
 	    if (null !== $separator) {
 	        $separator = self::getPathSeparator();
 	    }
-	    $matrix = Sphere_Node_Matrix::fromPath($path, $separator);
+	    $matrix = Matrix::fromPath($path, $separator);
 		return self::factory($matrix);
 	}
 	
@@ -91,7 +90,7 @@ class Sphere_Node extends Sphere_Node_NodeAbstract
 	}
 	
 	/**
-	 * Method for creating Sphere_Node_Interface instances from raw values
+	 * Method for creating Nodeinstances from raw values
 	 * @param integer $lftNumer
 	 * @param integer $lftDenom
 	 * @param integer $rgtNumer
@@ -100,7 +99,7 @@ class Sphere_Node extends Sphere_Node_NodeAbstract
 	 * @param integer $trueLftDenom
 	 * @param integer $trueRgtNumer
 	 * @param integer $trueRgtDenom
-	 * @return Sphere_Node_Interface
+	 * @return Node
 	 */
 	public static function fromValues(
 		$lftNumer, 
@@ -114,9 +113,9 @@ class Sphere_Node extends Sphere_Node_NodeAbstract
 	)
 	{
 	  
-	   $matrix 	   = Sphere_Node_Matrix::fromValues($lftNumer, $lftDenom, $rgtNumer, $rgtDenom);
+	   $matrix 	   = Matrix::fromValues($lftNumer, $lftDenom, $rgtNumer, $rgtDenom);
 
-	   $trueMatrix = Sphere_Node_Matrix::fromValues($trueLftNumer, $trueLftDenom, $trueRgtNumer, $trueRgtDenom);
+	   $trueMatrix = Matrix::fromValues($trueLftNumer, $trueLftDenom, $trueRgtNumer, $trueRgtDenom);
 		return self::factory($matrix, $trueMatrix);
 	}
 	
@@ -129,11 +128,11 @@ class Sphere_Node extends Sphere_Node_NodeAbstract
 	
 	/**
 	 * Returns the position of the child in relation to the parent.
-	 * @param Sphere_Node_Interface $parent
-	 * @param Sphere_Node_Interface $child
+	 * @param Sphere\Node\Interface $parent
+	 * @param Sphere\Node\Interface $child
 	 * @return integer
 	 */
-	public static function childPosition(Sphere_Node_NodeInterface $parent, Sphere_Node_NodeInterface $child, $useTrueMatrix = false)
+	public static function childPosition(NodeInterface $parent, NodeInterface $child, $useTrueMatrix = false)
 	{
         return $parent->getChildPosition($child, $useTrueMatrix);
 	}
@@ -141,7 +140,7 @@ class Sphere_Node extends Sphere_Node_NodeAbstract
     /**
      * Return the contents of the node
      * (non-PHPdoc)
-     * @see library/Sphere/Node/Sphere_Node_Interface#getContent()
+     * @see \Sphere\Node\Interface#getContent()
      * @return mixed
      */	
 	public function getContent()
@@ -151,7 +150,7 @@ class Sphere_Node extends Sphere_Node_NodeAbstract
     /**
      * Set the contents of the node
      * (non-PHPdoc)
-     * @see library/Sphere/Node/Sphere_Node_Interface#setContent($content)
+     * @see \Sphere\Node\Interface#setContent($content)
      * @param mixed The content to put in this Node
      */	
 	public function setContent($content)

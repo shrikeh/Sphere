@@ -9,7 +9,7 @@
  * @version       	Revision $LastChangedRevision$ by $LastChangedBy$ on $LastChangedDate$  
  * @access        	public
  */
-
+namespace Sphere\Node\Matrix;
 /**
  * Class for representing hierarchical IDs as continued fractions
  * @category		Sphere
@@ -20,7 +20,7 @@
  * @version       	Revision $LastChangedRevision$ by $LastChangedBy$ on $LastChangedDate$  
  * @access        	public
  */
-interface Sphere_Node_Matrix_MatrixInterface extends Iterator
+interface MatrixInterface extends \Iterator
 {
 	
 }

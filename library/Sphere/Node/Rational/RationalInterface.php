@@ -1,5 +1,7 @@
 <?php
-interface Sphere_Node_Rational_RationalInterface
+namespace Sphere\Node\Rational;
+
+interface RationalInterface
 {
     /**
      * Returns the path for this Rational
